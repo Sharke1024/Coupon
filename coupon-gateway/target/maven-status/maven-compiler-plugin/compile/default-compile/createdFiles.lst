@@ -1,0 +1,8 @@
+com\imooc\coupon\filter\AbstractZuulFilter.class
+com\imooc\coupon\ZuulGatewayApplication.class
+com\imooc\coupon\filter\RateLimiterFilter.class
+com\imooc\coupon\filter\TokenFilter.class
+com\imooc\coupon\filter\AbstractPostZuulFilter.class
+com\imooc\coupon\filter\AbstractPreZuulFilter.class
+com\imooc\coupon\filter\AccessLogFilter.class
+com\imooc\coupon\filter\PreRequestFilter.class

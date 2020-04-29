@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="coupon-template" />
+        <module name="coupon-common" />
+        <module name="coupon-gateway" />
+        <module name="coupon-eureka" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="coupon-common" target="1.8" />
+      <module name="coupon-eureka" target="1.8" />
+      <module name="coupon-gateway" target="1.8" />
+      <module name="coupon-template" target="1.8" />
+      <module name="imooc-coupon" target="1.8" />
+      <module name="imooc-coupon-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="coupon-common" options="-parameters" />
+      <module name="coupon-eureka" options="-parameters" />
+      <module name="coupon-gateway" options="-parameters" />
+      <module name="coupon-template" options="-parameters" />
+      <module name="imooc-coupon-service" options="-parameters" />
+    </option>
+  </component>
+</project>
