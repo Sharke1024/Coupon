@@ -40,7 +40,7 @@ public class AsyncServiceImpl implements IAsyncService {
      * @param template {@link CouponTemplate} 优惠券模板实体
      * */
     @Override
-    public void asyncConstructConponByTemplate(CouponTemplate template) {
+    public void asyncConstructCouponByTemplate(CouponTemplate template) {
         Stopwatch watch =Stopwatch.createStarted();
 
         Set<String >couponCodes = buildCouponCode(template);
