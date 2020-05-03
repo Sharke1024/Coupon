@@ -5,11 +5,13 @@ spring:
   application:
     name: coupon-gateway
 
+# 服务注册
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka/
 
+# zuul 网关
 zuul:
   prefix: /imooc
   routes:
@@ -17,11 +19,12 @@ zuul:
     template:
       path: /coupon-template/**
       serviceId: eureka-client-coupon-template
-      strip-prefix: false
+      strip-prefix: false           # 不跳过前缀
   host:
-    connect-timeout-millis: 15000
+    connect-timeout-millis: 15000    # 连接超时 15s
     socket-timeout-millis: 60000
 
+# 负载均衡
 ribbon:
   ConnectTimeout: 15000
   ReadTimeout: 15000

@@ -6,7 +6,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**
- * <h1>分发目标枚举属性转换器</h1>
+ * <h1>分发目标枚举属性转换器</h1> (由于数据库不知道是存储 分发目标 的 code 还是 description )
  * @Author DL_Wu
  * @Date 2020/4/28 19:46
  * @Version 1.0

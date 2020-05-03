@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
  *  对http序列化的控制
  * @Author DL_Wu
  * @Date 2020/4/27 15:04
- * @Version 1.0
  */
 @Configuration
 public class JacksonConfig {

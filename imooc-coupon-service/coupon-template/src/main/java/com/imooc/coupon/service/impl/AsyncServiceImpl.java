@@ -58,16 +58,16 @@ public class AsyncServiceImpl implements IAsyncService {
         watch.stop();
         log.info("Construct CouponCode By Template Cost: {}ms" , watch.elapsed(TimeUnit.MILLISECONDS));
 
-        //TODO  发送短信或者邮件通知优惠券模板已经可用
+        // TODO  发送短信或者邮件通知优惠券模板已经可用
         log.info("CouponTemplate({}) Is Available!", template.getId());
     }
 
     /**
      * <h2>构造优惠卷码</h2>
      * 优惠劵码（对应于每一张优惠劵，18位）
-     * 前四位：产品线+ 类型
-     * 中六位：日期随机（200429）
-     * 后八位：0~9随机8位数
+     *      前四位：产品线+ 类型
+     *      中六位：日期随机（200429）
+     *      后八位：0~9随机8位数
      *
      * @param template {@link CouponTemplate}实体类
      * @return Set<String> 与 template.count 相同个数的优惠券码

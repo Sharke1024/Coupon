@@ -6,7 +6,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**
- * <h1>优惠券分类枚举属性转换器</h1>
+ * <h1>优惠券分类枚举属性转换器</h1>  (由于数据库不知道是存储优惠劵分发的 code 还是 description )
  * AttributeConverter<X, Y>
  *      X: 是实体属性的类型
  *      Y: 是数据库字段的类型

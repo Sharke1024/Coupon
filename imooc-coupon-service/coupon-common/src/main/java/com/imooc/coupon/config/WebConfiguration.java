@@ -2,7 +2,7 @@ package com.imooc.coupon.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -21,6 +21,6 @@ public class WebConfiguration implements WebMvcConfigurer {
         //清除原有的信息
         converters.clear();
         //java对象转json
-        converters.add(new MappingJackson2CborHttpMessageConverter());
+        converters.add(new MappingJackson2HttpMessageConverter());
     }
 }
