@@ -15,4 +15,10 @@ public interface IAsyncService {
      * @param template {@link CouponTemplate} 优惠券模板实体
      * */
     void asyncConstructCouponByTemplate(CouponTemplate template );
+
+    /**
+     * 根据模板 异步删除优惠劵码
+     * @param template 模板
+     */
+    void asyncDeleteCouponTemplateByTemplate(CouponTemplate template);
 }

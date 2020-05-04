@@ -25,6 +25,7 @@ import java.util.Date;
  * @Author DL_Wu
  * @Date 2020/5/3
  */
+/*
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @SuppressWarnings("all")
@@ -66,8 +67,5 @@ public class BuildTemplateTest {
         request.setRule(rule);
         return request;
     }
-
-
-
-
 }
+*/

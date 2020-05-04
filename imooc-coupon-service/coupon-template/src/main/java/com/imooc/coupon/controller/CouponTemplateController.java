@@ -51,8 +51,8 @@ public class CouponTemplateController {
 
     /**
      * <h2>构建优惠劵模板详情</h2>
-     *  127.0.0.1:7001/coupon-template/template/info?id=10
-     *  127.0.0.1:9000/imooc/coupon-template/template/info?id=10
+     *  127.0.0.1:7001/coupon-template/template/build/info?id=19
+     *  127.0.0.1:9000/imooc/coupon-template/template/build/info?id=19
      */
     @GetMapping("/template/build/info")
     public CouponTemplate buildCouponTemplateInfo(@RequestParam Integer id) throws CouponException{
@@ -82,5 +82,17 @@ public class CouponTemplateController {
         return templateBaseService.findIdsTemplateSDK(ids);
     }
 
+
+    /**
+     * <h2>根据id删除对应的模板</h2>
+     * @param id 模板id
+     * 127.0.0.1:7001/coupon-template/template/delete?id=16
+     * 127.0.0.1:9000/imooc/coupon-template/template/delete?id=16
+     */
+    @GetMapping("/template/delete")
+    public void deleteByTemplateId(@RequestParam Integer id) throws CouponException{
+        log.info("Delete Template By Id:{}",id);
+        templateBaseService.deleteByTemplateId(id);
+    }
 
 }

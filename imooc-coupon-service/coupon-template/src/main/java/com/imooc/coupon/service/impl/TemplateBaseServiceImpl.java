@@ -4,7 +4,6 @@ import com.imooc.coupon.dao.CouponTemplateDao;
 import com.imooc.coupon.entity.CouponTemplate;
 import com.imooc.coupon.exception.CouponException;
 import com.imooc.coupon.service.IAsyncService;
-import com.imooc.coupon.service.IBuildTemplateService;
 import com.imooc.coupon.service.ITemplateBaseService;
 import com.imooc.coupon.vo.CouponTemplateSDK;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +29,13 @@ public class TemplateBaseServiceImpl implements ITemplateBaseService {
     /** CouponTemplate Dao */
     private final CouponTemplateDao templateDao;
 
+    /** 调用异步服务 **/
+    private final IAsyncService asyncService;
+
     @Autowired
-    public TemplateBaseServiceImpl(CouponTemplateDao templateDao) {
+    public TemplateBaseServiceImpl(CouponTemplateDao templateDao, IAsyncService asyncService) {
         this.templateDao = templateDao;
+        this.asyncService = asyncService;
     }
 
     /**
@@ -72,6 +75,24 @@ public class TemplateBaseServiceImpl implements ITemplateBaseService {
         //将templates 中的id 以及自身 内容 分别映射到Map<Integer, CouponTemplateSDK>中
         return templates.stream().map(this::template2TemplateSDK).collect(Collectors.toMap(
                 CouponTemplateSDK::getId, Function.identity()));
+    }
+
+    /**
+     * 根据模板id 删除对应模板
+     * @param id TemplateId
+     */
+    @Override
+    public void deleteByTemplateId(Integer id) throws CouponException{
+        //根据id查找对应的模板
+        Optional<CouponTemplate> template = templateDao.findById(id);
+        if (!template.isPresent()){
+            throw new CouponException("Template Is Not Exist: "+id);
+        }
+        //删除数据库对应模板
+        templateDao.deleteById(template.get().getId());
+
+        //删除 redis 中 模板的优惠劵码
+        asyncService.asyncDeleteCouponTemplateByTemplate(template.get());
     }
 
     /**

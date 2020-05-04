@@ -16,6 +16,7 @@ import java.util.*;
  * @Author DL_Wu
  * @Date 2020/5/3
  */
+/*
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class TemplateBaseTest {
@@ -23,10 +24,12 @@ public class TemplateBaseTest {
     @Autowired
     private ITemplateBaseService templateBaseService;
 
-    /**
+    */
+/**
      * 根据优惠券模板 id 获取优惠券模板信息
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void templateInfo() throws Exception{
         CouponTemplate couponTemplate = templateBaseService.buildTemplateInfo(12);
@@ -34,18 +37,22 @@ public class TemplateBaseTest {
         System.out.println(JSON.toJSONString(couponTemplate));
     }
 
-    /**
+    */
+/**
      * 查找所有可用的优惠券模板<
-     */
+     *//*
+
     @Test
     public void findAllTemplate(){
         List<CouponTemplateSDK> couponTemplateSDKS = templateBaseService.finaAllUsableTemplate();
         System.out.println(couponTemplateSDKS);
     }
 
-    /**
+    */
+/**
      * 获取模板 ids 到 CouponTemplateSDK 的映射
-     */
+     *//*
+
     @Test
     public void findIdsTemplateSDK(){
         Map<Integer, CouponTemplateSDK> idsTemplateSDK = templateBaseService.findIdsTemplateSDK(Arrays.asList(11, 12, 13, 10));
@@ -53,3 +60,4 @@ public class TemplateBaseTest {
     }
 
 }
+*/

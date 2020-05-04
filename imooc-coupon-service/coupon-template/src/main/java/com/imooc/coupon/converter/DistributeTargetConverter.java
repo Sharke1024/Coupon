@@ -7,6 +7,9 @@ import javax.persistence.Converter;
 
 /**
  * <h1>分发目标枚举属性转换器</h1> (由于数据库不知道是存储 分发目标 的 code 还是 description )
+ * AttributeConverter<X, Y>
+ *      X: 是实体属性的类型
+ *      Y: 是数据库字段的类型
  * @Author DL_Wu
  * @Date 2020/4/28 19:46
  * @Version 1.0

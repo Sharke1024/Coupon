@@ -8,6 +8,9 @@ import javax.persistence.Converter;
 
 /**
  *<h1>优惠券规则属性转换器</h1>
+ * AttributeConverter<X, Y>
+ *      X: 是实体属性的类型
+ *      Y: 是数据库字段的类型
  * @Author DL_Wu
  * @Date 2020/4/28 19:49
  * @Version 1.0

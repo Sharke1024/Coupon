@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/imooc-coupon-service/coupon-common/coupon-common.iml" filepath="$PROJECT_DIR$/imooc-coupon-service/coupon-common/coupon-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-coupon-service/coupon-distribution/coupon-distribution.iml" filepath="$PROJECT_DIR$/imooc-coupon-service/coupon-distribution/coupon-distribution.iml" />
       <module fileurl="file://$PROJECT_DIR$/coupon-eureka/coupon-eureka.iml" filepath="$PROJECT_DIR$/coupon-eureka/coupon-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/coupon-gateway/coupon-gateway.iml" filepath="$PROJECT_DIR$/coupon-gateway/coupon-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/imooc-coupon-service/coupon-template/coupon-template.iml" filepath="$PROJECT_DIR$/imooc-coupon-service/coupon-template/coupon-template.iml" />
