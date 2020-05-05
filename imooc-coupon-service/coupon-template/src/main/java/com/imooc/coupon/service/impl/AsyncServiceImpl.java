@@ -63,19 +63,6 @@ public class AsyncServiceImpl implements IAsyncService {
     }
 
     /**
-     * 根据模板 异步删除优惠劵码
-     * @param template 优惠劵Id
-     */
-    @Override
-    public void asyncDeleteCouponTemplateByTemplate(CouponTemplate template) {
-        Stopwatch watch =Stopwatch.createStarted();
-        redisTemplate.opsForList().rightPop("imooc_coupon_template_code_"+template.getId());
-        watch.stop();
-        log.info("CouponTemplate({}) Is Delete  !", template.getId());
-        log.info("CouponTTemplate Delete cost : {}ms",watch.elapsed(TimeUnit.MILLISECONDS));
-    }
-
-    /**
      * <h2>构造优惠卷码</h2>
      * 优惠劵码（对应于每一张优惠劵，18位）
      *      前四位：产品线+ 类型

@@ -4,6 +4,7 @@ import com.imooc.coupon.entity.Coupon;
 import com.imooc.coupon.exception.CouponException;
 import com.imooc.coupon.vo.AcquireTemplateRequest;
 import com.imooc.coupon.vo.CouponTemplateSDK;
+import com.imooc.coupon.vo.SettlementInfo;
 
 import java.util.List;
 
@@ -43,6 +44,12 @@ public interface IUserService {
      */
     Coupon acquireTemplate(AcquireTemplateRequest request)throws CouponException;
 
-
+    /**
+     *<h2>结算(核销)优惠券</h2>
+     * @param info {@link SettlementInfo}
+     * @return {@link SettlementInfo}
+     * @throws CouponException
+     */
+    SettlementInfo settlement(SettlementInfo info)throws CouponException;
 
 }

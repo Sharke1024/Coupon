@@ -77,23 +77,6 @@ public class TemplateBaseServiceImpl implements ITemplateBaseService {
                 CouponTemplateSDK::getId, Function.identity()));
     }
 
-    /**
-     * 根据模板id 删除对应模板
-     * @param id TemplateId
-     */
-    @Override
-    public void deleteByTemplateId(Integer id) throws CouponException{
-        //根据id查找对应的模板
-        Optional<CouponTemplate> template = templateDao.findById(id);
-        if (!template.isPresent()){
-            throw new CouponException("Template Is Not Exist: "+id);
-        }
-        //删除数据库对应模板
-        templateDao.deleteById(template.get().getId());
-
-        //删除 redis 中 模板的优惠劵码
-        asyncService.asyncDeleteCouponTemplateByTemplate(template.get());
-    }
 
     /**
      * <h2>将 CouponTemplate 转换为 CouponTemplateSDK</h2>

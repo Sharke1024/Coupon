@@ -11,6 +11,7 @@ import java.util.List;
  * @Author DL_Wu
  * @Date 2020/5/4
  */
+
 public interface CouponDao extends JpaRepository<Coupon,Integer> {
 
     /**

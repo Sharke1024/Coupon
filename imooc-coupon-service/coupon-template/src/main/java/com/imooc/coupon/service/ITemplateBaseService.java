@@ -37,10 +37,5 @@ public interface ITemplateBaseService {
      * */
     Map<Integer , CouponTemplateSDK> findIdsTemplateSDK(Collection<Integer> ids);
 
-    /**
-     * 根据模板id 删除对应模板
-     * @param id TemplateId
-     */
-    void deleteByTemplateId(Integer id) throws CouponException;
 
 }
