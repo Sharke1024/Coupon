@@ -24,6 +24,9 @@ public interface IRedisService {
 
     /**
      * <h2>保存空的优惠劵到缓存中</h2>
+     *      目的：
+     *          避免缓存穿透问题
+     *
      * @param userId 用户id
      * @param status 优惠劵状态列表
      */

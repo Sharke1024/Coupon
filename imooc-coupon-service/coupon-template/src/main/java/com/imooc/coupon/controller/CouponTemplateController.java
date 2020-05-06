@@ -66,7 +66,7 @@ public class CouponTemplateController {
      * 127.0.0.1:9000/imooc/coupon-template/template/sdk/all
      */
     @GetMapping("/template/sdk/all")
-    public List<CouponTemplateSDK> finaAllUsableTemplate() throws CouponException{
+    public List<CouponTemplateSDK> findAllUsableTemplate() throws CouponException{
         log.info("Find All Usable Template");
         return templateBaseService.finaAllUsableTemplate();
     }

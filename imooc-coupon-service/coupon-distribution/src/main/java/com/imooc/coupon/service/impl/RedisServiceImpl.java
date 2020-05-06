@@ -9,7 +9,6 @@ import com.imooc.coupon.service.IRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.RedisOperations;
@@ -156,7 +155,6 @@ public class RedisServiceImpl implements IRedisService {
         //USABLE . UESD
         log.debug("Add Coupon To Cache For Used .");
         Map<String ,String> needCacheForUsed = new HashMap<>(coupons.size());
-
 
         String redisKeyForUsable = status2RedisKey(CouponStatus.USABLE.getCode(),userId);
         String redisKeyForUsed = status2RedisKey(CouponStatus.USED.getCode(),userId);
