@@ -1,6 +1,7 @@
 package com.imooc.coupon.feign;
 
 import com.imooc.coupon.exception.CouponException;
+import com.imooc.coupon.feign.hystrix.SettlementClientHystrix;
 import com.imooc.coupon.vo.CommonResponse;
 import com.imooc.coupon.vo.SettlementInfo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @Author DL_Wu
  * @Date 2020/5/6
  */
-@FeignClient(value = "eureka-client-coupon-settlement")
+@FeignClient(value = "eureka-client-coupon-settlement",fallback = SettlementClientHystrix.class)
 public interface SettlementClient {
 
     /**
@@ -22,7 +23,7 @@ public interface SettlementClient {
      * @return  结算信息
      * @throws CouponException
      */
-    @RequestMapping(value = "/coupon-settlement/settle/rule",method = RequestMethod.POST)
+    @RequestMapping(value = "/coupon-settlement/settlement/compute",method = RequestMethod.POST)
     CommonResponse<SettlementInfo> computeRule(@RequestBody SettlementInfo settlementInfo) throws CouponException;
 
 }

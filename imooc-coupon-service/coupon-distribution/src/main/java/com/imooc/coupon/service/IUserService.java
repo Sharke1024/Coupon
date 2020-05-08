@@ -34,7 +34,7 @@ public interface IUserService {
      * @param userId    用户id
      * @return  {@link CouponTemplateSDK}s
      */
-    List<CouponTemplateSDK> findAvailableTemplate(Long userId);
+    List<CouponTemplateSDK> findAvailableTemplate(Long userId) throws CouponException;
 
     /**
      *<h2>用户领取优惠卷</h2>

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/imooc-coupon-service/coupon-distribution/coupon-distribution.iml" filepath="$PROJECT_DIR$/imooc-coupon-service/coupon-distribution/coupon-distribution.iml" />
       <module fileurl="file://$PROJECT_DIR$/coupon-eureka/coupon-eureka.iml" filepath="$PROJECT_DIR$/coupon-eureka/coupon-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/coupon-gateway/coupon-gateway.iml" filepath="$PROJECT_DIR$/coupon-gateway/coupon-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-coupon-service/coupon-settlement/coupon-settlement.iml" filepath="$PROJECT_DIR$/imooc-coupon-service/coupon-settlement/coupon-settlement.iml" />
       <module fileurl="file://$PROJECT_DIR$/imooc-coupon-service/coupon-template/coupon-template.iml" filepath="$PROJECT_DIR$/imooc-coupon-service/coupon-template/coupon-template.iml" />
       <module fileurl="file://$PROJECT_DIR$/imooc-coupon.iml" filepath="$PROJECT_DIR$/imooc-coupon.iml" />
       <module fileurl="file://$PROJECT_DIR$/imooc-coupon-service/imooc-coupon-service.iml" filepath="$PROJECT_DIR$/imooc-coupon-service/imooc-coupon-service.iml" />
