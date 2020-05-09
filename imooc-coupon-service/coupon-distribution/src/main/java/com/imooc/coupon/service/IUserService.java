@@ -30,7 +30,7 @@ public interface IUserService {
     List<Coupon> findCouponsByStatus(Long userId, Integer status) throws CouponException;
 
     /**
-     *  <h2>根据用户id 查找当前可用的优惠劵模板</h2>
+     *  <h2>根据用户 id 查找当前可用的优惠劵模板</h2>
      * @param userId    用户id
      * @return  {@link CouponTemplateSDK}s
      */

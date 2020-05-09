@@ -42,4 +42,5 @@ public class CouponTemplateSDK {
     /** 优惠券规则 */
     private TemplateRule rule;
 
+
 }

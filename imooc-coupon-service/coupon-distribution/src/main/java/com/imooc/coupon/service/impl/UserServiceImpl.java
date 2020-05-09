@@ -10,34 +10,26 @@ import com.imooc.coupon.feign.SettlementClient;
 import com.imooc.coupon.feign.TemplateClient;
 import com.imooc.coupon.service.IRedisService;
 import com.imooc.coupon.service.IUserService;
-import com.imooc.coupon.vo.AcquireTemplateRequest;
-import com.imooc.coupon.vo.CouponClassify;
-import com.imooc.coupon.vo.CouponKafkaMessage;
-import com.imooc.coupon.vo.CouponTemplateSDK;
-import com.imooc.coupon.vo.GoodsInfo;
-import com.imooc.coupon.vo.SettlementInfo;
+import com.imooc.coupon.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
  * <h1>用户服务相关接口实现</h1>
- *      所有的操作过程， 状态都是保存到redis中，并通过Kafka把消息传递到Mysql中
+ *      所有的操作过程， 状态都是保存到 redis中，并通过Kafka把消息传递到Mysql中
  *      为什么使用 Kafka, 而不是直接使用 SpringBoot 中的异步处理 ?
  *          安全性问题 ，因为异步任务，可能是失败的，如果是springBoot中的异步处理，就会造成丢失，
  *          而使用kafka 即使是失败也可以从消息中进行处理，保证redis中数据的一致性
@@ -164,11 +156,12 @@ public class UserServiceImpl implements IUserService {
                 )
         );
         List<CouponTemplateSDK> result = new ArrayList<>(limit2Template.size());
+        //找到可用的优惠劵
         List<Coupon> userUsableCoupons = findCouponsByStatus(userId, CouponStatus.USABLE.getCode());
 
         log.debug("Current User Has Usable Coupon:{},{}",userId,userUsableCoupons.size());
 
-        // key 是 templateId
+        // key 是 templateId    , 将List集合转为map集合
         Map<Integer,List<Coupon>> templateId2Coupons =
                 userUsableCoupons.stream().collect(Collectors.groupingBy(Coupon::getTemplateId));
 
@@ -187,13 +180,57 @@ public class UserServiceImpl implements IUserService {
 
     /**
      *<h2>用户领取优惠卷</h2>
+     *  1.从couponTemplate 拿到对应的优惠劵，并检查是否已过期
+     *  2.根据 limitation 判断用户是否可以领取
+     *  3.save to DB
+     *  4.填充couponTemplateSDK
+     *  5.save to Cache
      * @param request {@link AcquireTemplateRequest}
      * @return {@link Coupon}
      * @throws CouponException
      */
     @Override
     public Coupon acquireTemplate(AcquireTemplateRequest request) throws CouponException {
-        return null;
+        Map<Integer, CouponTemplateSDK> id2template = templateClient
+                .findIds2TemplateSDK(Collections.singletonList(request.getTemplateSDK().getId())).getData();
+
+        //判断优惠劵模板是否存在
+        if (id2template.size() <=0){
+            log.error("Can Not Acquire Template From TemplateClient :{}",request.getTemplateSDK().getId());
+            throw new CouponException("Can Not Acquire Template From TemplateClient");
+        }
+
+        //用户是否可以领取这张优惠劵
+        List<Coupon> userUsableCoupons =findCouponsByStatus(request.getUserId(),CouponStatus.USABLE.getCode());
+        Map<Integer ,List<Coupon>> templateId2Coupons = userUsableCoupons
+                .stream().collect(Collectors.groupingBy(Coupon::getTemplateId));
+
+        if (templateId2Coupons.containsKey(request.getTemplateSDK().getId())  &&
+                templateId2Coupons.get(request.getTemplateSDK().getId()).size() >=
+                        request.getTemplateSDK().getRule().getLimitation()){
+            log.error("Exceed Template Assign Limitation:{}",request.getTemplateSDK().getId());
+            throw new CouponException("Exceed Template Assign Limitation");  // 超过领取限制
+        }
+
+        //尝试去获取优惠劵码
+        String couponCode = redisService.tryToAcquireCouponCodeFromCache(request.getTemplateSDK().getId());
+        if (StringUtils.isEmpty(couponCode)){
+            log.error("Can Not Acquire Coupon Code:{}",request.getTemplateSDK().getId());
+            throw new CouponException("Can Not Acquire Coupon Code");
+        }
+
+        Coupon newCoupon = new Coupon(request.getTemplateSDK().getId()
+                ,request.getUserId(),couponCode,CouponStatus.USABLE);
+        newCoupon = couponDao.save(newCoupon);
+
+        //填充 Coupon 对象的 couponTemplateSDK， 一定要在放入缓冲之前去填充
+        newCoupon.setTemplateSDK(request.getTemplateSDK());
+
+        //放入缓存
+        redisService.addCouponToCache(request.getUserId(),
+                Collections.singletonList(newCoupon),CouponStatus.USABLE.getCode());
+
+        return newCoupon;
     }
 
     /**
