@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SettlementController {
 
+    /** 结算规则执行管理器 */
     private final ExecutorManager executorManager;
 
     @Autowired
