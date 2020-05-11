@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Qinyi.
  */
 @Slf4j
-@Component
+//@Component
 public class TokenFilter extends AbstractPreZuulFilter {
 
     @Override

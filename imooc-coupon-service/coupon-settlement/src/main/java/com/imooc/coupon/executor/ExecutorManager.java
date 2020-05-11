@@ -3,6 +3,7 @@ package com.imooc.coupon.executor;
 import com.imooc.coupon.constant.CouponCategory;
 import com.imooc.coupon.constant.RuleFlag;
 import com.imooc.coupon.exception.CouponException;
+import com.imooc.coupon.vo.CouponTemplateSDK;
 import com.imooc.coupon.vo.SettlementInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -38,9 +39,14 @@ public class ExecutorManager implements BeanPostProcessor {
         //单类优惠劵
         if (settlement.getCouponAndTemplateInfos().size() ==1){
 
+            CouponTemplateSDK templateSDK = settlement.getCouponAndTemplateInfos().get(0).getTemplateSDK();
+            if (null == templateSDK){
+                log.error("Current Not Have Coupon Can Use!!!");
+                throw new CouponException("Current Not Have Coupon Can Use!!!");
+            }
             //获取优惠劵类别
             CouponCategory category =CouponCategory.of(
-                    settlement.getCouponAndTemplateInfos().get(0).getTemplateSDK().getCategory()
+                    templateSDK.getCategory()
             );
 
             switch (category){

@@ -6,6 +6,7 @@ import com.imooc.coupon.exception.CouponException;
 import com.imooc.coupon.service.IUserService;
 import com.imooc.coupon.vo.AcquireTemplateRequest;
 import com.imooc.coupon.vo.CouponTemplateSDK;
+import com.imooc.coupon.vo.SettlementInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -74,5 +75,18 @@ public class CouponDistributionController {
         log.info("User Get Template Coupon Code:{}", JSON.toJSONString(request));
         return userService.acquireTemplate(request);
     }
+
+    /**
+     * <h2>结算（核销）优惠劵</h2>
+     * @param info
+     * @return
+     * @throws CouponException
+     */
+    @PostMapping("/settlement")
+    public SettlementInfo settlementInfo(@RequestBody  SettlementInfo info)throws CouponException{
+        log.info("Settlement: {}",JSON.toJSONString(info));
+        return userService.settlement(info);
+    }
+
 
 }

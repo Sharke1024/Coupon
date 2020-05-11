@@ -18,3 +18,9 @@ eureka:
     # 设置 Eureka Server 所在的地址, 查询服务和注册服务都需要依赖这个地址
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+#  server:
+    # Eureka 自我保护机制 屏蔽警告信息
+#    enable-self-preservation: false
+#    renewal-percent-threshold: 0.45
